@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using la_mia_pizzeria_static.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
@@ -19,6 +20,7 @@ namespace la_mia_pizzeria_static.Models
         public string Name { get; set; }
 
         [Required]
+        [CustomDescription]
         public string Description { get; set; }
 
         [Required]
