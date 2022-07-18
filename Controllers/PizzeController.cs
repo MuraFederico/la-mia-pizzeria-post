@@ -15,6 +15,34 @@ namespace la_mia_pizzeria_static.Controllers
             
         }
 
+        [HttpGet]
+        public IActionResult CreateForm()
+        {
+/*            PizzaContext context = new PizzaContext();
+            List<Ingredient> ingredients = context.Ingredients.ToList();*/
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza pizza)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("CreateForm", pizza);
+            }
+
+            using(PizzaContext context = new PizzaContext())
+            {
+                List<Ingredient> ingredients = context.Ingredients.ToList();
+                pizza.Ingredients = ingredients;
+                context.Add(pizza);
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         public IActionResult Details(int id)
         {
             PizzaContext context = new PizzaContext();
